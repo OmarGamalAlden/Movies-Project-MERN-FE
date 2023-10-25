@@ -14,8 +14,12 @@ import People from "./Components/People/People.jsx";
 import Profile from "./Components/Profile/Profile.jsx";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute.jsx";
 import ItemDeatils from "./Components/ItemDeatils/ItemDeatils.jsx";
+import { MediaContext } from "./Context/MediaContext.js";
 
 export default function App() {
+  // get data from Context..
+  let { trendingMovies, trendingTV, trendingPerson } = useContext(MediaContext);
+
   let { userData, setUserData } = useContext(AuthContext);
   useEffect(() => {
     //solve the problem of loading website!!
@@ -39,7 +43,11 @@ export default function App() {
           path: "home",
           element: (
             <ProtectedRoute>
-              <Home />
+              <Home
+                trendingMovies={trendingMovies}
+                trendingPerson={trendingPerson}
+                trendingTV={trendingTV}
+              />
             </ProtectedRoute>
           ),
         },
@@ -47,7 +55,7 @@ export default function App() {
           path: "tv",
           element: (
             <ProtectedRoute>
-              <TV />
+              <TV trendingTV={trendingTV} />
             </ProtectedRoute>
           ),
         },
@@ -55,7 +63,7 @@ export default function App() {
           path: "movies",
           element: (
             <ProtectedRoute>
-              <Movies />
+              <Movies trendingMovies={trendingMovies} />
             </ProtectedRoute>
           ),
         },
@@ -79,7 +87,7 @@ export default function App() {
           path: "person",
           element: (
             <ProtectedRoute>
-              <People />
+              <People trendingPerson={trendingPerson} />
             </ProtectedRoute>
           ),
         },

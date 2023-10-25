@@ -3,20 +3,10 @@ import React, { useEffect, useState } from "react";
 import LoadingScreen from "../LoadingScreen/LoadingScreen.jsx";
 import MediaItem from "../MediaItem/MediaItem.jsx";
 
-export default function TV() {
-  const [tvData, setTvData] = useState([]);
-  async function getTvData() {
-    let { data } = await axios.get(
-      `https://api.themoviedb.org/3/trending/tv/week?api_key=6161aa80861351ec2aafa166ff23456b`
-    );
-    setTvData(data.results);
-  }
-  useEffect(() => {
-    getTvData();
-  }, []);
+export default function TV({ trendingTV }) {
   return (
     <>
-      {tvData.length ? (
+      {trendingTV.length ? (
         <div className="container">
           <div className="row py-5">
             <div className="col-md-4 d-flex align-items-center">
@@ -29,7 +19,7 @@ export default function TV() {
                 <div className="brdr w-100 mt-3"></div>
               </div>
             </div>
-            {tvData.map((movie, index) => (
+            {trendingTV.map((movie, index) => (
               <MediaItem key={index} item={movie} />
             ))}
           </div>

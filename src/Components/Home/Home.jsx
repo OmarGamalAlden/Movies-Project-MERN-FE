@@ -1,11 +1,8 @@
-import React, { useContext } from "react";
 import { Helmet } from "react-helmet";
-import { MediaContext } from "../../Context/MediaContext.js";
 import MediaItem from "../MediaItem/MediaItem.jsx";
 import LoadingScreen from "../LoadingScreen/LoadingScreen.jsx";
 
-export default function Home() {
-  let { trendingMovies, trendingTV, trendingPerson } = useContext(MediaContext);
+export default function Home({ trendingMovies, trendingTV, trendingPerson }) {
   return (
     <>
       <Helmet>

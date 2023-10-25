@@ -40,17 +40,19 @@ export default function Signin({ saveUserData }) {
       })
       .catch(({ response }) => {
         setIsLoading(false);
-        let { data } = response;
-        let errorCollection = [];
-        if (data.validationResult) {
-          data.validationResult.map((err) => {
-            return errorCollection.push(err.message);
-          });
-          setResError(errorCollection);
-        }
-        if (data.error) {
-          errorCollection.push(data.error);
-          setResError(errorCollection);
+        if (response.data) {
+          let { data } = response;
+          let errorCollection = [];
+          if (data.validationResult) {
+            data.validationResult.map((err) => {
+              return errorCollection.push(err.message);
+            });
+            setResError(errorCollection);
+          }
+          if (data.error) {
+            errorCollection.push(data.error);
+            setResError(errorCollection);
+          }
         }
       });
   }
